@@ -1,3 +1,4 @@
+from program_execution_module import ProgramExecutionModule
 GLOBAL_KEY = 'DatiConCadenzaMensileInfortuni'
 
 
@@ -25,11 +26,13 @@ def main():
 
     input_file = 'datasets/inail_small.json'
     R = read_dataset(input_file)
+    k = 5
     #for r in R:
     #    pretty_print(r)
     print('The dataset contains', len(R), 'tuples')
     PCBuckets = ProgramExecutionModule(R, k)
-
+    
+    print(PCBuckets)
 
 if __name__ == '__main__':
     main()

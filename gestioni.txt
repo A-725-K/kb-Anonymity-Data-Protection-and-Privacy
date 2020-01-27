@@ -1,0 +1,4 @@
+***** Legenda Gestioni ******
+I:	0
+S:	1
+A:	2

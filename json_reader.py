@@ -56,7 +56,8 @@ for INPUT_FILE in INPUT_FILES:
                 split_date(t, 'DataAccadimento') 
                     
                 # DataMorte
-                t['DataMorte'] = 0 if t['DataMorte'] == None else 1
+                t['Deceduto'] = 0 if t['DataMorte'] == None else 1
+                del t['DataMorte']
 
                 # LuogoAccadimento
                 t['LuogoAccadimento'] = int(t['LuogoAccadimento'])
@@ -102,7 +103,7 @@ for INPUT_FILE in INPUT_FILES:
                 t['GrandeGruppoTariffario'] = -1 if t['GrandeGruppoTariffario'] == 'ND' else int(t['GrandeGruppoTariffario'])
 
                 # Regione
-                t['Regione'] = int(t['Regione'])	
+                del t['Regione'] # only ligurian accidents
 
             with open(OUTPUT_FILES[file_idx], 'w', encoding='utf-8') as f:
                 json.dump(json_arr, f, ensure_ascii=False, indent=4)

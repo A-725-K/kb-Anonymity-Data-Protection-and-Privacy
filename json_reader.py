@@ -5,7 +5,6 @@ OUTPUT_FILES = ['datasets/inail_small.json', 'datasets/inail_medium.json', 'data
 INPUT_FILES = ['datasets/inail_small_orig.json', 'datasets/inail_medium_orig.json', 'datasets/inail_big_orig.json']
 
 belfiore_mapping = dict()
-ateco_mapping = dict()
 gestioni_mapping = dict()
 
 
@@ -110,5 +109,5 @@ for INPUT_FILE in INPUT_FILES:
     file_idx += 1
 
 # print the legendas of dictionaries
-print_legenda(belfiore_mapping, 'belfiore.txt', 'Legenda Indice Belfiore')
-print_legenda(gestioni_mapping, 'gestioni.txt', 'Legenda Gestioni')
+print_legenda(belfiore_mapping, 'mappings/belfiore.txt', 'Legenda Indice Belfiore')
+print_legenda(gestioni_mapping, 'mappings/gestioni.txt', 'Legenda Gestioni')

@@ -14,7 +14,7 @@ def ProgramExecutionModule(R, k):
    
     for t in R:
         pc = []
-        P_test(t, pc)
+        #P_test(t, pc)
         key_bucket = path_conditions2str(pc)
         try:
             PCBuckets[key_bucket] += [t]
@@ -22,3 +22,4 @@ def ProgramExecutionModule(R, k):
             PCBuckets[key_bucket] = [t]
 
     delete_small_buckets(PCBuckets, k)
+    return PCBuckets

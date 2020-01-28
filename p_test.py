@@ -1,17 +1,19 @@
 #!/usr/bin/python3
 
 def P_test(t, pc):
-    ##########
-    # TEST 1 #
-    ##########
-            
+    test_1(t, pc)
+    test_2(t, pc)
+    test_3(t, pc)
+    test_4(t, pc)
+
+##########
+# TEST 1 #
+##########
+
+def test_1(t, pc):      
     #LUOGO NASCITA
-    if t['LuogoNascita'] == -1:
-        pc += [('LuogoNascita', '==', -1)]
-
-    elif t['LuogoNascita'] != 0:
-        pc += [('LuogoNascita', '!=', 0)]
-
+    if t['LuogoNascita'] == 0:
+        pc += [('LuogoNascita', '==', 0)]
         #DATA ACCADIMENTO
         if t['DataAccadimento']['Month'] == 10:
             pc += [('DataAccadimento_Month', '==', 10)]
@@ -35,12 +37,14 @@ def P_test(t, pc):
             pc += [('Deceduto', '==', 1)]	
 
     else:
-        pc += [('LuogoNascita', '==', 0)]
+        pc += [('LuogoNascita', '!=', 0)]
 
-    ##########
-    # TEST 2 #
-    ##########
 
+##########
+# TEST 2 #
+##########
+
+def test_2(t, pc):
     #SETTORE ATTIVITA' ECONOMICA MACRO
     if t['SettoreAttivitaEconomica']['Macro'] == 2:
         pc += [('SettoreAttivitaEconomica_Macro', '==', 2)]
@@ -58,10 +62,11 @@ def P_test(t, pc):
     else:
         pc += [('SettoreAttivitaEconomica_Macro', '!=', 2)]
             
-    ##########
-    # TEST 3 #
-    ##########
+##########
+# TEST 3 #
+##########
 
+def test_3(t, pc):
     #ETA
     if t['Eta'] <= 30:
         pc += [('Eta', '<=', 30)]
@@ -88,10 +93,11 @@ def P_test(t, pc):
         pc += [('ModalitaAccadimento', '==', 1)]
 
 
-    ##########
-    # TEST 4 #
-    ##########
-            
+##########
+# TEST 4 #
+##########
+
+def test_4(t, pc):      
     #DATA PROTOCOLLO
     if t['DataProtocollo']['Month'] == 12:		
         pc += [('DataProtocollo_Month', '==', 12)]

@@ -26,6 +26,8 @@ def mapping2int(t, param, d):
     if t[param] in d:
         t[param] = d[t[param]]
     else:
+        if t[param] == 'ND':
+            print(t)
         i = -1 if t[param] == 'ND' else len(d)
         d[t[param]] = i
         t[param] = i
@@ -90,7 +92,6 @@ for INPUT_FILE in INPUT_FILES:
                 del t['PosizioneAssicurativaTerritoriale']
 
                 # SettoreAttivitaEconomica
-                #mapping2int(t, 'SettoreAttivitaEconomica', ateco_mapping)
                 mapping_ateco(t, 'SettoreAttivitaEconomica')
 
                 # Gestione

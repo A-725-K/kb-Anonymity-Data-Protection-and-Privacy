@@ -90248,27 +90248,8 @@
     "SettoreAttivitaEconomica" : "Q 86",
     "GestioneTariffaria" : "4",
     "GrandeGruppoTariffario" : "0"
-  }, {
-    "DataRilevazione" : "31/12/2019",
-    "LuogoNascita" : "ND",
-    "Regione" : "7",
-    "Genere" : "M",
-    "Gestione" : "I",
-    "IdentificativoCaso" : "22729696",
-    "DataProtocollo" : "23/12/2019",
-    "DataAccadimento" : "20/12/2019",
-    "DataMorte" : null,
-    "LuogoAccadimento" : "010",
-    "IdentificativoInfortunato" : "13239051",
-    "Eta" : "64",
-    "ModalitaAccadimento" : "N",
-    "ConSenzaMezzoTrasporto" : "N",
-    "IdentificativoDatoreLavoro" : "-1",
-    "PosizioneAssicurativaTerritoriale" : "-1",
-    "SettoreAttivitaEconomica" : "ND",
-    "GestioneTariffaria" : "ND",
-    "GrandeGruppoTariffario" : "ND"
-  }, {
+  }, 
+  {
     "DataRilevazione" : "31/12/2019",
     "LuogoNascita" : "ITAL",
     "Regione" : "7",

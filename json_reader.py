@@ -9,8 +9,8 @@ gestioni_mapping = dict()
 
 
 def split_date(t, param):
-    data_array = [int(i) for i in t[param].split('/')]
-    t[param] = {'Day': data_array[0], 'Month': data_array[1], 'Year': data_array[2]}
+    data_array = [i for i in t[param].split('/')]
+    t[param] = int(data_array[2]+data_array[1]+data_array[0])
 
 
 def mapping_ateco(t, param):

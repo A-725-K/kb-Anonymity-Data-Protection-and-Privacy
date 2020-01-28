@@ -15,14 +15,16 @@ def test_1(t, pc):
     if t['LuogoNascita'] == 0:
         pc += [('LuogoNascita', '==', 0)]
         #DATA ACCADIMENTO
-        if t['DataAccadimento']['Month'] == 10:
-            pc += [('DataAccadimento_Month', '==', 10)]
+        if 20191001 <= t['DataAccadimento'] <= 20191031:
+            pc += [('DataAccadimento', '<=', 20191031)]
+            pc += [('DataAccadimento', '>=', 20191001)]
         
-        elif t['DataAccadimento']['Month'] == 11:
-            pc += [('DataAccadimento_Month', '==', 11)]
-
+        elif 20191101 <= t['DataAccadimento'] <= 20191130:
+            pc += [('DataAccadimento', '<=', 20191130)]
+            pc += [('DataAccadimento', '>=', 20191101)]
         else:
-            pc += [('DataAccadimento_Month', '==', 12)]
+            pc += [('DataAccadimento', '<=', 20191231)]
+            pc += [('DataAccadimento', '>=', 20191201)]
 
         #GENERE
         if t['Genere'] == 0:
@@ -71,7 +73,7 @@ def test_3(t, pc):
     if t['Eta'] <= 30:
         pc += [('Eta', '<=', 30)]
 
-    elif  t['Eta'] > 30 and t['DataAccadimento']['Month'] <= 45:
+    elif  t['Eta'] > 30 and t['Eta'] <= 45:
         pc += [('Eta', '>', 30)]
         pc += [('Eta', '<=', 45)]
 
@@ -99,8 +101,9 @@ def test_3(t, pc):
 
 def test_4(t, pc):      
     #DATA PROTOCOLLO
-    if t['DataProtocollo']['Month'] == 12:		
-        pc += [('DataProtocollo_Month', '==', 12)]
+    if 20191201 <= t['DataProtocollo'] <= 20191231:		
+        pc += [('DataProtocollo', '<=', 20191231)]
+        pc += [('DataProtocollo', '>=', 20191201)]
         
         #GRANDE GRUPPO TARIFFARIO
         if t['GrandeGruppoTariffario'] == 4:
@@ -117,5 +120,5 @@ def test_4(t, pc):
             pc += [('GrandeGruppoTariffario', '!=', 8)]
             pc += [('GrandeGruppoTariffario', '!=', 9)]
     else:
-        pc += [('DataProtocollo_Month', '!=', 12)]
+        pc += [('DataProtocollo', '<', 20191201)]
 	

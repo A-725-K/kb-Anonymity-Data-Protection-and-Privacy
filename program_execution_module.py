@@ -1,7 +1,7 @@
 from p_test import P_test
 
 def path_conditions2str(lst):
-    return ''.join([str(i) for i in lst])
+    return '|'.join([str(i) for i in lst])
 
 
 def delete_small_buckets(buckets, k):

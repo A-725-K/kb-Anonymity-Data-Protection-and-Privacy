@@ -43,6 +43,12 @@ def set_constraints(S, solver, dict_z3):
             print('This operation ({}) is not allowed'.format(op))
             exit(1)
 
+def z3model2row(model,dict_z3):
+    row = {}
+    for k, v in dict_z3.items():
+        row[k] = model[v].as_long()
+    return row
+
 
 def ConstraintSolverModule(S):
     solver = Solver()
@@ -70,8 +76,8 @@ def ConstraintSolverModule(S):
     #print(solver)
 
     if solver.check() == sat:
-        m = solver.model()
-        print(m)
-        return m
+        model = solver.model()
+        #print(m)
+        return z3model2row(model,dict_z3)
 
     return None

@@ -22,7 +22,8 @@ def str2path_condition(s):
 
 
 def ConstraintGenerationModule(PCBuckets, alg, no_pf):
-    i = 0
+    print('Privacy preservation technique:',alg)
+    R1 = []
     for pc, B in PCBuckets.items():
         if alg == 'P-F':
             S = NoFieldRepeat(B, no_pf)
@@ -31,11 +32,11 @@ def ConstraintGenerationModule(PCBuckets, alg, no_pf):
         else:
             print("Algritmo non implementato")
             exit(1)
-
+        # S = []
         S += str2path_condition(pc)
-        ConstraintSolverModule(S)
-        '''print('\n\n\n\n++++++++++++++ {}\n\n\n\n'.format(len(B)))
+        row = ConstraintSolverModule(S)
+        if row:
+            R1 += [row] 
+    return R1
+            
 
-        if i == 5:
-            break
-        i += 1'''

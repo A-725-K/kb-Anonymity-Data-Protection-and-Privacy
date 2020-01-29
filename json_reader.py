@@ -13,13 +13,13 @@ def split_date(t, param):
     t[param] = int(data_array[2]+data_array[1]+data_array[0])
 
 
-def mapping_ateco(t, param):
-    if t[param] == 'ND':
-        t[param] = {'Macro': -1, 'Micro': -1}
+def mapping_ateco(t):
+    if t['SettoreAttivitaEconomica'] == 'ND':
+        t['SettoreAttivitaEconomica_Macro'] = -1
         return
 
-    ateco_array = t[param].split(' ')
-    t[param] = {'Macro': ord(ateco_array[0]) - ord('A'), 'Micro': int(ateco_array[1])}
+    ateco_array = t['SettoreAttivitaEconomica'].split(' ')
+    t['SettoreAttivitaEconomica_Macro'] = ord(ateco_array[0]) - ord('A')
 
 
 def mapping2int(t, param, d):
@@ -92,7 +92,8 @@ for INPUT_FILE in INPUT_FILES:
                 del t['PosizioneAssicurativaTerritoriale']
 
                 # SettoreAttivitaEconomica
-                mapping_ateco(t, 'SettoreAttivitaEconomica')
+                mapping_ateco(t)
+                del t['SettoreAttivitaEconomica']
 
                 # Gestione
                 mapping2int(t, 'Gestione', gestioni_mapping)

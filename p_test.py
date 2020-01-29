@@ -48,7 +48,7 @@ def test_1(t, pc):
 
 def test_2(t, pc):
     #SETTORE ATTIVITA' ECONOMICA MACRO
-    if t['SettoreAttivitaEconomica']['Macro'] == 2:
+    if t['SettoreAttivitaEconomica_Macro'] == 2:
         pc += [('SettoreAttivitaEconomica_Macro', '==', 2)]
 
         #GESTIONE

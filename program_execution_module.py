@@ -35,10 +35,12 @@ def ProgramExecutionModule(R, k):
 
     n_paths = len(PCBuckets)
     delete_small_buckets(PCBuckets, k) # to ensure some kind of k-anonymization
+    n_paths_left = len(PCBuckets)
 
     t_end = time.time()
     print('{*} Number of Different Paths\t\t--\t', n_paths, sep='')
-    print('{*} Number of Paths Removed\t\t--\t', n_paths - len(PCBuckets), sep='')
+    print('{*} Number of Paths Removed\t\t--\t', n_paths - n_paths_left, sep='')
+    print('{*} Number of Paths Left\t\t--\t', n_paths_left, sep='')
     print('{*} Time Elapsed During Computations:')
     print('    [*] Program Execution Module:\t', t_end - t_start, 's')
 

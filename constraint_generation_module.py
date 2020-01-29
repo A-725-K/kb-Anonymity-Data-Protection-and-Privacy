@@ -49,7 +49,7 @@ def ConstraintGenerationModule(PCBuckets, alg, no_pf):
     t_end = time.time()
     print('    [*] Constraints Module:\t\t', t_end - t_start, 's')
     
-    print('{*} Privacy preservation technique\t--\t', end='')
+    print('{*} Privacy Preservation Technique\t--\t', end='')
     if alg == 'P-F':
         print('Same-Path, No Field Repeat')
     elif alg == 'P-T':

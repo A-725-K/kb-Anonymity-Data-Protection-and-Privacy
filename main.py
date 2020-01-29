@@ -52,6 +52,7 @@ def main():
     PCBuckets = ProgramExecutionModule(R, k)
     
     R1 = ConstraintGenerationModule(PCBuckets, algorithm, no_pf)
+    print('{*} Tuple Released\t\t\t--\t', len(R1), sep='')
     print('{*} Path Coverage\t\t\t--\t', '{0:.5g}'.format(len(R1) / len(PCBuckets) * 100), '%', sep='')
     json_dump(output_file, R1)
     

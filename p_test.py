@@ -22,6 +22,7 @@ def test_1(t, pc):
         elif 20191101 <= t['DataAccadimento'] <= 20191130:
             pc += [('DataAccadimento', '<=', 20191130)]
             pc += [('DataAccadimento', '>=', 20191101)]
+
         else:
             pc += [('DataAccadimento', '<=', 20191231)]
             pc += [('DataAccadimento', '>=', 20191201)]
@@ -29,12 +30,14 @@ def test_1(t, pc):
         #GENERE
         if t['Genere'] == 0:
             pc += [('Genere', '==', 0)]
+
         else:
             pc += [('Genere', '==', 1)]
             
         #DECEDUTO 
         if t['Deceduto'] == 0:
             pc += [('Deceduto', '==', 0)]
+
         else:
             pc += [('Deceduto', '==', 1)]	
 
@@ -63,7 +66,8 @@ def test_2(t, pc):
 
     else:
         pc += [('SettoreAttivitaEconomica_Macro', '!=', 2)]
-            
+
+
 ##########
 # TEST 3 #
 ##########
@@ -108,17 +112,22 @@ def test_4(t, pc):
         #GRANDE GRUPPO TARIFFARIO
         if t['GrandeGruppoTariffario'] == 4:
             pc += [('GrandeGruppoTariffario', '==', 4)]
+
         elif t['GrandeGruppoTariffario'] == 6:
             pc += [('GrandeGruppoTariffario', '==', 6)]
+
         elif t['GrandeGruppoTariffario'] == 8:
             pc += [('GrandeGruppoTariffario', '==', 8)]
+
         elif t['GrandeGruppoTariffario'] == 9:
             pc += [('GrandeGruppoTariffario', '==', 9)]
+
         else:
             pc += [('GrandeGruppoTariffario', '!=', 4)]
             pc += [('GrandeGruppoTariffario', '!=', 6)]
             pc += [('GrandeGruppoTariffario', '!=', 8)]
             pc += [('GrandeGruppoTariffario', '!=', 9)]
+
     else:
         pc += [('DataProtocollo', '<', 20191201)]
 	

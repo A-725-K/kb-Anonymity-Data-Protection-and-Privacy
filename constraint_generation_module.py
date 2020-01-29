@@ -1,4 +1,6 @@
+import time
 from constraint_solver_module import ConstraintSolverModule
+
 
 def NoFieldRepeat(B, no_pf):
     S = []
@@ -22,7 +24,8 @@ def str2path_condition(s):
 
 
 def ConstraintGenerationModule(PCBuckets, alg, no_pf):
-    print('Privacy preservation technique:',alg)
+    t_start = time.time()
+    
     R1 = []
     for pc, B in PCBuckets.items():
         if alg == 'P-F':
@@ -30,13 +33,24 @@ def ConstraintGenerationModule(PCBuckets, alg, no_pf):
         elif alg == 'P-T':
             S = NoTupleRepeat(B)
         else:
-            print("Algritmo non implementato")
+            print('[!!] Algrithm not implemented !')
             exit(1)
+
         # S = []
         S += str2path_condition(pc)
         row = ConstraintSolverModule(S)
         if row:
-            R1 += [row] 
+            R1 += [row]
+    
+    t_end = time.time()
+    print('    [*] Constraints Module:\t\t', t_end - t_start, 's')
+    
+    print('{*} Privacy preservation technique\t--\t', end='')
+    if alg == 'P-F':
+        print('Same-Path, No Field Repeat')
+    elif alg == 'P-T':
+        print('Same-Path, No Tuple Repeat')
+
     return R1
             
 

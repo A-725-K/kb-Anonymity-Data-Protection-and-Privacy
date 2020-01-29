@@ -1,4 +1,6 @@
+import time
 from p_test import P_test
+
 
 def path_conditions2str(lst):
     return '|'.join([str(i) for i in lst])
@@ -15,10 +17,10 @@ def delete_small_buckets(buckets, k):
         del buckets[short_pc]
 
 
-
 def ProgramExecutionModule(R, k):
+    t_start = time.time()
+
     PCBuckets = {}
-    
     for t in R:
         pc = []
         P_test(t, pc)
@@ -29,7 +31,12 @@ def ProgramExecutionModule(R, k):
             PCBuckets[key_bucket] = [t]
 
     n_paths = len(PCBuckets)
-    print('Number of different paths', n_paths)
     delete_small_buckets(PCBuckets, k)
-    print('Number of paths removed', n_paths-len(PCBuckets))
+
+    t_end = time.time()
+    print('{*} Number of different paths\t\t--\t', n_paths, sep='')
+    print('{*} Number of paths removed\t\t--\t', n_paths - len(PCBuckets), sep='')
+    print('{*} Time elapsed during computations:')
+    print('    [*] Program Execution Module:\t', t_end - t_start, 's')
+
     return PCBuckets

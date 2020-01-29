@@ -1,5 +1,6 @@
 from z3 import *
 
+
 def add_range_constraints(solver, dict_z3):
     solver.add(dict_z3['LuogoNascita']>=0, dict_z3['LuogoNascita']<=79)
     solver.add(Or(dict_z3['Genere']==0, dict_z3['Genere']==1))
@@ -40,8 +41,9 @@ def set_constraints(S, solver, dict_z3):
         elif op == '<':
             solver.add(dict_z3[attr] < val)
         else:
-            print('This operation ({}) is not allowed'.format(op))
+            print('[!!] This operation ({}) is not allowed'.format(op))
             exit(1)
+
 
 def z3model2row(model,dict_z3):
     row = {}
@@ -51,9 +53,8 @@ def z3model2row(model,dict_z3):
 
 
 def ConstraintSolverModule(S):
+    #Z3 variables and solver
     solver = Solver()
-    #z3 variables
-
     dict_z3 = {
         'LuogoNascita': Int('LuogoNascita'),
         'Genere': Int('Genere'),
@@ -73,11 +74,8 @@ def ConstraintSolverModule(S):
     add_range_constraints(solver, dict_z3)
     set_constraints(S, solver, dict_z3)
 
-    #print(solver)
-
     if solver.check() == sat:
         model = solver.model()
-        #print(m)
-        return z3model2row(model,dict_z3)
+        return z3model2row(model, dict_z3)
 
     return None

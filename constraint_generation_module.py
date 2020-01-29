@@ -1,9 +1,11 @@
+from constraint_solver_module import ConstraintSolverModule
+
 def NoFieldRepeat(B, no_pf):
     S = []
     for t in B:
         for k, v in t.items():
             if k not in no_pf:
-                S += [(k, '!=', v)]                
+                S += [(k, '!=', v)]               
     return S
 
 
@@ -20,6 +22,7 @@ def str2path_condition(s):
 
 
 def ConstraintGenerationModule(PCBuckets, alg, no_pf):
+    i = 0
     for pc, B in PCBuckets.items():
         if alg == 'P-F':
             S = NoFieldRepeat(B, no_pf)
@@ -28,4 +31,11 @@ def ConstraintGenerationModule(PCBuckets, alg, no_pf):
         else:
             print("Algritmo non implementato")
             exit(1)
+
         S += str2path_condition(pc)
+        ConstraintSolverModule(S)
+        '''print('\n\n\n\n++++++++++++++ {}\n\n\n\n'.format(len(B)))
+
+        if i == 5:
+            break
+        i += 1'''

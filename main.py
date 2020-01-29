@@ -13,7 +13,7 @@ def read_dataset(input_file):
     return R
 
 
-def pretty_print(t):
+def pretty_print_tuple(t):
     for k, v in t.items():
         print('- {}:\t{}'.format(k, v))
     print('')
@@ -28,9 +28,13 @@ def main():
     input_file = 'datasets/inail_small.json'
     R = read_dataset(input_file)
     k = 5
-    no_pf = ['Genere', 'Deceduto', 'ModalitaAccadimento', 'ConSenzaMezzoTrasporto', 'LuogoAccadimento']
+    no_pf = ['Genere', 'Deceduto', 'ModalitaAccadimento', \
+             'ConSenzaMezzoTrasporto', 'LuogoAccadimento', \
+             'GestioneTariffaria']
+
     #for r in R:
-    #    pretty_print(r)
+    #    pretty_print_tuple(r)
+
     print('The dataset contains', len(R), 'tuples')
     PCBuckets = ProgramExecutionModule(R, k)
     ConstraintGenerationModule(PCBuckets, 'P-F', no_pf)

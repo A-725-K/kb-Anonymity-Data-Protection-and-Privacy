@@ -1,22 +1,22 @@
 from z3 import *
 
 def add_range_constraints(solver, dict_z3):
-    
-    solver.add(dict_z3['LuogoNascita'] >=0, dict_z3['LuogoNascita'] <=79)
+    solver.add(dict_z3['LuogoNascita']>=0, dict_z3['LuogoNascita']<=79)
     solver.add(Or(dict_z3['Genere']==0, dict_z3['Genere']==1))
     solver.add(Or(dict_z3['Gestione']==0, dict_z3['Gestione']==1, dict_z3['Gestione']==2))
     solver.add(Or(\
             And(dict_z3['DataProtocollo']>=20191001,dict_z3['DataProtocollo']<=20191031),\
-            And(dict_z3['DataProtocollo']>=20191101,dict_z3['DataProtocollo']<=20191030),\
-            And(dict_z3['DataProtocollo']>=20191201,dict_z3['DataProtocollo']<=20191230)\
+            And(dict_z3['DataProtocollo']>=20191101,dict_z3['DataProtocollo']<=20191130),\
+            And(dict_z3['DataProtocollo']>=20191201,dict_z3['DataProtocollo']<=20191231)\
     ))
     solver.add(Or(\
             And(dict_z3['DataAccadimento']>=20191001,dict_z3['DataAccadimento']<=20191031),\
-            And(dict_z3['DataAccadimento']>=20191101,dict_z3['DataAccadimento']<=20191030),\
-            And(dict_z3['DataAccadimento']>=20191201,dict_z3['DataAccadimento']<=20191230)\
+            And(dict_z3['DataAccadimento']>=20191101,dict_z3['DataAccadimento']<=20191130),\
+            And(dict_z3['DataAccadimento']>=20191201,dict_z3['DataAccadimento']<=20191231)\
     ))
+    solver.add(dict_z3['DataAccadimento']<=dict_z3['DataProtocollo'])
     solver.add(dict_z3['LuogoAccadimento']>=8,dict_z3['LuogoAccadimento']<=11)
-    solver.add(dict_z3['Eta']>=10,dict_z3['Eta']<=83)
+    solver.add(dict_z3['Eta']>=3,dict_z3['Eta']<=90)
     solver.add(Or(dict_z3['ModalitaAccadimento']==0,dict_z3['ModalitaAccadimento']==1))
     solver.add(Or(dict_z3['ConSenzaMezzoTrasporto']==0,dict_z3['ConSenzaMezzoTrasporto']==1))
     solver.add(dict_z3['SettoreAttivitaEconomica_Macro']>=-1,dict_z3['SettoreAttivitaEconomica_Macro']<=18)
@@ -49,20 +49,29 @@ def ConstraintSolverModule(S):
     #z3 variables
 
     dict_z3 = {
-        'LuogoNascita': BitVec('LuogoNascita', 32),
-        'Genere': BitVec('Genere', 32),
-        'Gestione': BitVec('Gestione', 32),
-        'DataProtocollo': BitVec('DataProtocollo', 32),
-        'DataAccadimento': BitVec('DataAccadimento', 32),
-        'LuogoAccadimento': BitVec('LuogoAccadimento', 32),
-        'Eta': BitVec('Eta', 32),
-        'ModalitaAccadimento': BitVec('ModalitaAccadimento', 32),
-        'ConSenzaMezzoTrasporto': BitVec('ConSenzaMezzoTrasporto', 32),
-        'SettoreAttivitaEconomica_Macro': BitVec('SettoreAttivitaEconomica_Macro', 32),
-        'GestioneTariffaria': BitVec('GestioneTariffaria', 32),
-        'GrandeGruppoTariffario': BitVec('GrandeGruppoTariffario', 32),
-        'Deceduto': BitVec('Deceduto', 32)
+        'LuogoNascita': Int('LuogoNascita'),
+        'Genere': Int('Genere'),
+        'Gestione': Int('Gestione'),
+        'DataProtocollo': Int('DataProtocollo'),
+        'DataAccadimento': Int('DataAccadimento'),
+        'LuogoAccadimento': Int('LuogoAccadimento'),
+        'Eta': Int('Eta'),
+        'ModalitaAccadimento': Int('ModalitaAccadimento'),
+        'ConSenzaMezzoTrasporto': Int('ConSenzaMezzoTrasporto'),
+        'SettoreAttivitaEconomica_Macro': Int('SettoreAttivitaEconomica_Macro'),
+        'GestioneTariffaria': Int('GestioneTariffaria'),
+        'GrandeGruppoTariffario': Int('GrandeGruppoTariffario'),
+        'Deceduto': Int('Deceduto')
     }
     
     add_range_constraints(solver, dict_z3)
     set_constraints(S, solver, dict_z3)
+
+    #print(solver)
+
+    if solver.check() == sat:
+        m = solver.model()
+        print(m)
+        return m
+
+    return None

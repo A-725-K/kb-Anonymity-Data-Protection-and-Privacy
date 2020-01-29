@@ -1,5 +1,4 @@
-#!/usr/bin/python3
-
+# SUT (System Under Test), the program consists of 4 modules
 def P_test(t, pc):
     test_1(t, pc)
     test_2(t, pc)
@@ -11,10 +10,11 @@ def P_test(t, pc):
 ##########
 
 def test_1(t, pc):      
-    #LUOGO NASCITA
+    # LUOGO NASCITA
     if t['LuogoNascita'] == 0:
         pc += [('LuogoNascita', '==', 0)]
-        #DATA ACCADIMENTO
+        
+        # DATA ACCADIMENTO
         if 20191001 <= t['DataAccadimento'] <= 20191031:
             pc += [('DataAccadimento', '<=', 20191031)]
             pc += [('DataAccadimento', '>=', 20191001)]
@@ -27,14 +27,14 @@ def test_1(t, pc):
             pc += [('DataAccadimento', '<=', 20191231)]
             pc += [('DataAccadimento', '>=', 20191201)]
 
-        #GENERE
+        # GENERE
         if t['Genere'] == 0:
             pc += [('Genere', '==', 0)]
 
         else:
             pc += [('Genere', '==', 1)]
             
-        #DECEDUTO 
+        # DECEDUTO 
         if t['Deceduto'] == 0:
             pc += [('Deceduto', '==', 0)]
 
@@ -50,11 +50,11 @@ def test_1(t, pc):
 ##########
 
 def test_2(t, pc):
-    #SETTORE ATTIVITA' ECONOMICA MACRO
+    # SETTORE ATTIVITA' ECONOMICA MACRO
     if t['SettoreAttivitaEconomica_Macro'] == 2:
         pc += [('SettoreAttivitaEconomica_Macro', '==', 2)]
 
-        #GESTIONE
+        # GESTIONE
         if t['Gestione'] == 0:
             pc += [('Gestione', '==', 0)]
 
@@ -73,7 +73,7 @@ def test_2(t, pc):
 ##########
 
 def test_3(t, pc):
-    #ETA
+    # ETA'
     if t['Eta'] <= 30:
         pc += [('Eta', '<=', 30)]
 
@@ -84,11 +84,11 @@ def test_3(t, pc):
     else:
         pc += [('Eta', '>', 45)]
 
-    #MODALITA ACCADIMENTO
+    # MODALITA' ACCADIMENTO
     if t['ModalitaAccadimento'] == 0:
         pc += [('ModalitaAccadimento', '==', 0)]
 
-        #CON SENZA MEZZO DI TRASPORTO
+        # CON/SENZA MEZZO DI TRASPORTO
         if t['ConSenzaMezzoTrasporto'] == 0:
             pc += [('ConSenzaMezzoTrasporto', '==', 0)]
         
@@ -104,12 +104,12 @@ def test_3(t, pc):
 ##########
 
 def test_4(t, pc):      
-    #DATA PROTOCOLLO
+    # DATA PROTOCOLLO
     if 20191201 <= t['DataProtocollo'] <= 20191231:		
         pc += [('DataProtocollo', '<=', 20191231)]
         pc += [('DataProtocollo', '>=', 20191201)]
         
-        #GRANDE GRUPPO TARIFFARIO
+        # GRANDE GRUPPO TARIFFARIO
         if t['GrandeGruppoTariffario'] == 4:
             pc += [('GrandeGruppoTariffario', '==', 4)]
 
@@ -130,4 +130,3 @@ def test_4(t, pc):
 
     else:
         pc += [('DataProtocollo', '<', 20191201)]
-	

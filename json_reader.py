@@ -8,11 +8,13 @@ belfiore_mapping = dict()
 gestioni_mapping = dict()
 
 
+# serialize the date using the format: yymmdd (as integer)
 def split_date(t, param):
     data_array = [i for i in t[param].split('/')]
     t[param] = int(data_array[2] + data_array[1] + data_array[0])
 
 
+# transform sector of economic activity into an integer
 def mapping_ateco(t):
     if t['SettoreAttivitaEconomica'] == 'ND':
         t['SettoreAttivitaEconomica_Macro'] = -1
@@ -22,6 +24,7 @@ def mapping_ateco(t):
     t['SettoreAttivitaEconomica_Macro'] = ord(ateco_array[0]) - ord('A')
 
 
+# transform a string data type into integers through a map
 def mapping2int(t, param, d):
     if t[param] in d:
         t[param] = d[t[param]]
@@ -33,6 +36,7 @@ def mapping2int(t, param, d):
         t[param] = i
 
 
+# show the mapping to understand our transformations
 def print_legenda(d, out_file, header):    
     with open(out_file, 'w') as f:
         f.write('***** {} ******\n'.format(header))

@@ -1,6 +1,7 @@
 from z3 import *
 
 
+# add constraints about ranges of attributes (after have seen the dataset and the test program)
 def add_range_constraints(solver, dict_z3):
     solver.add(dict_z3['LuogoNascita']>=0, dict_z3['LuogoNascita']<=79)
     solver.add(Or(dict_z3['Genere']==0, dict_z3['Genere']==1))
@@ -26,6 +27,7 @@ def add_range_constraints(solver, dict_z3):
     solver.add(Or(dict_z3['Deceduto']==0,dict_z3['Deceduto']==1))
 
 
+# add paths' constraints collected during the execution of the program
 def set_constraints(S, solver, dict_z3):
     for (attr, op, val) in S:
         if op == '==':
@@ -45,13 +47,15 @@ def set_constraints(S, solver, dict_z3):
             exit(1)
 
 
-def z3model2row(model,dict_z3):
+# convert the Z3 model into a tuple (== row in the released dataset)
+def z3model2row(model, dict_z3):
     row = {}
     for k, v in dict_z3.items():
         row[k] = model[v].as_long()
     return row
 
 
+# collect all the constraints and try to derive a new tuple
 def ConstraintSolverModule(S):
     #Z3 variables and solver
     solver = Solver()
@@ -70,10 +74,12 @@ def ConstraintSolverModule(S):
         'GrandeGruppoTariffario': Int('GrandeGruppoTariffario'),
         'Deceduto': Int('Deceduto')
     }
-    
-    add_range_constraints(solver, dict_z3)
-    set_constraints(S, solver, dict_z3)
+   
+    # collecting constraints
+    add_range_constraints(solver, dict_z3)  # range-based
+    set_constraints(S, solver, dict_z3)     # path-based
 
+    # try to solve the equation
     if solver.check() == sat:
         model = solver.model()
         return z3model2row(model, dict_z3)

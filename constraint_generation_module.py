@@ -20,7 +20,6 @@ def str2path_condition(s):
 
 
 def ConstraintGenerationModule(PCBuckets, alg, no_pf):
-
     for pc, B in PCBuckets.items():
         if alg == 'P-F':
             S = NoFieldRepeat(B, no_pf)
@@ -30,5 +29,3 @@ def ConstraintGenerationModule(PCBuckets, alg, no_pf):
             print("Algritmo non implementato")
             exit(1)
         S += str2path_condition(pc)
-        print(S)
-        break  

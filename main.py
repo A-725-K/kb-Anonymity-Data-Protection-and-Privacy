@@ -28,7 +28,7 @@ def main():
     input_file = 'datasets/inail_small.json'
     R = read_dataset(input_file)
     k = 5
-    no_pf = ['Genere', 'Deceduto', 'ModalitaAccadimento', 'ConSenzaMezzoTrasporto']
+    no_pf = ['Genere', 'Deceduto', 'ModalitaAccadimento', 'ConSenzaMezzoTrasporto', 'LuogoAccadimento']
     #for r in R:
     #    pretty_print(r)
     print('The dataset contains', len(R), 'tuples')

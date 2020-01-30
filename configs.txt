@@ -1,0 +1,15 @@
+LuogoNascita Genere Gestione DataProtocollo LuogoAccadimento DataAccadimento Eta ModalitaAccadimento ConSenzaMezzoTrasporto SettoreAttivitaEconomica_Macro GestioneTariffaria GrandeGruppoTariffario Deceduto
+LuogoNascita:>= 0 <= 79
+Genere:== 0,== 1
+Gestione:== 0,== 1,== 2
+DataProtocollo:>= 20191001 <= 20191031,>= 20191101 <= 20191130,>= 20191201 <= 20191231
+DataAccadimento:>= 20191001 <= 20191031,>= 20191101 <= 20191130,>= 20191201 <= 20191231
+#DataAccadimento <= DataProtocollo
+LuogoAccadimento:>= 8 <= 11
+Eta:>= 3 <= 90
+ModalitaAccadimento:== 0,== 1
+ConSenzaMezzoTrasporto:== 0,== 1
+SettoreAttivitaEconomica_Macro:>= -1 <= 18
+GestioneTariffaria:>= -1 <= 4 != 0
+GrandeGruppoTariffario:>= -1 <= 9
+Deceduto:== 0,== 1

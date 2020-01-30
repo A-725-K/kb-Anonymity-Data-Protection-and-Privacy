@@ -35,6 +35,7 @@ def check_cli_args():
     #   - value of k
     #   - input/output file [SMALL|MEDIUM|BIG]
     #   - type of algorithm
+    #   - range constraint file
 
     args_parser = argparse.ArgumentParser(description='Implementation of K-B Anonimity to anonymize data for testing purpose')
     required_args = args_parser.add_argument_group('required arguments')
@@ -42,14 +43,15 @@ def check_cli_args():
     required_args.add_argument('-o', '--output-file', help='path of anonymzed dataset', required=True)
     required_args.add_argument('-a', '--algorithm', help='choose one between P-F and P-T', required=True)
     required_args.add_argument('-k', help='degree of anonimity', type=int, required=True)
+    required_args.add_argument('-c', '--config-file', help='path of range constraints file', required=True)
     args = args_parser.parse_args()
-    return args.input_file, args.output_file, args.k, args.algorithm
+    return args.input_file, args.output_file, args.k, args.algorithm, args.config_file
 
 
 # driver function of the program
 def main():
     # get algorithm parameters from user
-    input_file, output_file, k, algorithm = check_cli_args()
+    input_file, output_file, k, algorithm, config_file = check_cli_args()
 
     t_start = time.time()
 
@@ -64,7 +66,10 @@ def main():
     print('{*} Number of Initial Tuples\t\t--\t', len(R), sep='')
     PCBuckets, n_paths = ProgramExecutionModule(R, k)
     
-    R1 = ConstraintGenerationModule(PCBuckets, algorithm, no_pf)
+    if algorithm == 'P-F':
+        R1 = ConstraintGenerationModule(PCBuckets, algorithm, config_file, no_pf=no_pf)
+    elif algorithm == 'P-T':
+        R1 = ConstraintGenerationModule(PCBuckets, algorithm, config_file, field_pt='Eta')
     print('{*} Tuple Released\t\t\t--\t', len(R1), sep='')
     print('{*} Path Coverage\t\t\t--\t', '{0:.5g}'.format(len(R1) / n_paths * 100), '%', sep='')
     json_dump(output_file, R1)

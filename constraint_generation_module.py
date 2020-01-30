@@ -14,10 +14,10 @@ def NoFieldRepeat(B, no_pf):
 
 
 # every released tuple is distinguishable
-def NoTupleRepeat(B):
+def NoTupleRepeat(B, field_pt):
     S = []
     for t in B:
-        S += [('Eta', '!=', t['Eta'])]
+        S += [(field_pt, '!=', t[field_pt])]
     return S
 
 
@@ -27,22 +27,30 @@ def str2path_condition(s):
 
 
 # generate all the constraints based on the algorithm and try to generate a new tuple anonymized
-def ConstraintGenerationModule(PCBuckets, alg, no_pf):
+def ConstraintGenerationModule(PCBuckets, alg, config_file, no_pf=None, field_pt=None):
     t_start = time.time()
     
     R1 = []
     for pc, B in PCBuckets.items():
         if alg == 'P-F': # same-path, no field repeat
-            S = NoFieldRepeat(B, no_pf)
+            if no_pf:
+                S = NoFieldRepeat(B, no_pf)
+            else:
+                print('[!!] You must specify P-F attributes to exclude !')
+                exit(1)
         elif alg == 'P-T': # same-path, no tuple repeat
-            S = NoTupleRepeat(B)
+            if field_pt:
+                S = NoTupleRepeat(B, field_pt)
+            else:
+                print('[!!] You must specify P-T attribute !')
+                exit(1)
         else:
-            print('[!!] Algrithm not implemented !')
+            print('[!!] Algorithm not implemented !')
             exit(1)
 
         # S = []
         S += str2path_condition(pc)
-        row = ConstraintSolverModule(S) # solve the constraints
+        row = ConstraintSolverModule(S, config_file) # solve the constraints
         if row:
             R1 += [row]
     

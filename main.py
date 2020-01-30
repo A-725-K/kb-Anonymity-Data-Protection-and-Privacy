@@ -1,5 +1,6 @@
 import time
 import json
+import argparse
 from program_execution_module import ProgramExecutionModule
 from constraint_generation_module import ConstraintGenerationModule
 
@@ -28,32 +29,44 @@ def json_dump(output_file, rows):
         json.dump({GLOBAL_KEY: rows}, f, ensure_ascii=False, indent=4)
 
 
-# driver function of the program
-def main():
+# check arguments from command line
+def check_cli_args():
     # cli parameters:
     #   - value of k
     #   - input/output file [SMALL|MEDIUM|BIG]
     #   - type of algorithm
 
+    args_parser = argparse.ArgumentParser(description='Implementation of K-B Anonimity to anonymize data for testing purpose')
+    required_args = args_parser.add_argument_group('required arguments')
+    required_args.add_argument('-i', '--input-file', help='path of json input dataset', required=True)
+    required_args.add_argument('-o', '--output-file', help='path of anonymzed dataset', required=True)
+    required_args.add_argument('-a', '--algorithm', help='choose one between P-F and P-T', required=True)
+    required_args.add_argument('-k', help='degree of anonimity', type=int, required=True)
+    args = args_parser.parse_args()
+    return args.input_file, args.output_file, args.k, args.algorithm
+
+
+# driver function of the program
+def main():
+    # get algorithm parameters from user
+    input_file, output_file, k, algorithm = check_cli_args()
+
     t_start = time.time()
-    
-    input_file = 'datasets/inail_medium.json'
-    output_file = 'datasets/anon_inail.json'
-    R = read_dataset(input_file)
-    k = 4
-    algorithm = 'P-T'
+
+    # field to exclude in no-field repeat algorithm
     no_pf = ['Genere', 'Deceduto', 'ModalitaAccadimento', \
              'ConSenzaMezzoTrasporto', 'LuogoAccadimento', \
              'GestioneTariffaria']
 
+    R = read_dataset(input_file)
     print('--- {} ---\n'.format('K-B Anonimity module'))
 
     print('{*} Number of Initial Tuples\t\t--\t', len(R), sep='')
-    PCBuckets = ProgramExecutionModule(R, k)
+    PCBuckets, n_paths = ProgramExecutionModule(R, k)
     
     R1 = ConstraintGenerationModule(PCBuckets, algorithm, no_pf)
     print('{*} Tuple Released\t\t\t--\t', len(R1), sep='')
-    print('{*} Path Coverage\t\t\t--\t', '{0:.5g}'.format(len(R1) / len(PCBuckets) * 100), '%', sep='')
+    print('{*} Path Coverage\t\t\t--\t', '{0:.5g}'.format(len(R1) / n_paths * 100), '%', sep='')
     json_dump(output_file, R1)
     
     t_end = time.time()

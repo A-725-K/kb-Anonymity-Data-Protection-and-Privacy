@@ -44,4 +44,4 @@ def ProgramExecutionModule(R, k):
     print('{*} Time Elapsed During Computations:')
     print('    [*] Program Execution Module:\t', t_end - t_start, 's')
 
-    return PCBuckets
+    return PCBuckets, n_paths

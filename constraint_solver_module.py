@@ -1,9 +1,11 @@
 from z3 import *
 
+# parse the configuration file line by line
 def read_configuration_file(config_file):
     return [line.rstrip('\n') for line in open(config_file)]
 
 
+# transform a high level constraint in a z3 formula
 def parseOp(dict_z3, attr, op, val):
     if op == '==':
         return(dict_z3[attr] == val)
@@ -34,12 +36,13 @@ def add_range_constraints(solver, dict_z3, configs):
             # range constraints of a single field
             field, constraints = conf.split(':')
             lst = constraints.split(',')
-            if len(lst) == 1:
+            if len(lst) == 1:   # all constraints are in AND
                 ops_vals = lst[0].split(' ')
                 for i in range(0, len(ops_vals), 2):
                     op = ops_vals[i]
                     val = int(ops_vals[i + 1])
                     solver.add(parseOp(dict_z3, field, op, val))
+
             else:
                 ors = []
                 for or_c in lst:
@@ -49,10 +52,12 @@ def add_range_constraints(solver, dict_z3, configs):
                         op = ops_vals[i]
                         val = int(ops_vals[i + 1])
                         ands += [parseOp(dict_z3, field, op, val)]
+
                     if len(ands) == 1:
-                        ors += [ands[0]]
-                    else:  
-                        ors += [And(ands)]
+                        ors += [ands[0]] # a set of OR conditions
+
+                    else: 
+                        ors += [And(ands)] # a set of OR of ANDs conditions
                         
                 solver.add(Or(ors))
 

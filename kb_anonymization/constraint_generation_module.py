@@ -1,6 +1,6 @@
 import time
 from ast import literal_eval as make_tuple
-from constraint_solver_module import ConstraintSolverModule
+from .constraint_solver_module import ConstraintSolverModule
 
 
 # every value in the released dataset is has not appeared in any raw data point

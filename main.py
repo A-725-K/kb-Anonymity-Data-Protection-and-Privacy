@@ -1,8 +1,8 @@
 import time
 import json
 import argparse
-from program_execution_module import ProgramExecutionModule
-from constraint_generation_module import ConstraintGenerationModule
+from kb_anonymization import program_execution_module as pem
+from kb_anonymization import constraint_generation_module as cgm
 
 GLOBAL_KEY = 'DatiConCadenzaMensileInfortuni'
 
@@ -64,12 +64,12 @@ def main():
     print('--- {} ---\n'.format('K-B Anonimity module'))
 
     print('{*} Number of Initial Tuples\t\t--\t', len(R), sep='')
-    PCBuckets, n_paths = ProgramExecutionModule(R, k)
+    PCBuckets, n_paths = pem.ProgramExecutionModule(R, k)
     
     if algorithm == 'P-F':
-        R1 = ConstraintGenerationModule(PCBuckets, algorithm, config_file, no_pf=no_pf)
+        R1 = cgm.ConstraintGenerationModule(PCBuckets, algorithm, config_file, no_pf=no_pf)
     elif algorithm == 'P-T':
-        R1 = ConstraintGenerationModule(PCBuckets, algorithm, config_file, field_pt='Eta')
+        R1 = cgm.ConstraintGenerationModule(PCBuckets, algorithm, config_file, field_pt='Eta')
     print('{*} Tuple Released\t\t\t--\t', len(R1), sep='')
     print('{*} Path Coverage\t\t\t--\t', '{0:.5g}'.format(len(R1) / n_paths * 100), '%', sep='')
     json_dump(output_file, R1)

@@ -27,15 +27,28 @@ where:
   <li>-<i>c</i>: a configuration file that contains the range constraints to apply over the fields of tuples in dataset</li>
 </ul>
 
+Otherwise you can simply launch the *test_runner* utility:
+```
+cd utilities
+./test_runner
+```
+
 ## How the *repo* works
 <ul>
   <li><b><i>datasets</i></b>: it contains all the data used in our experiments, and a bash script to gather them through an open API</li>
   <li><b><i>kb_anonymity</i></b>: the core of the program, it contains the library proposed by us</li>
   <li><b><i>mappings</i></b>: each file contains a map that represents some values transformed in integer</li>
   <li><b><i>main.py</i></b>: the entry point of the program, the users would like to modify it depending on their needs</li>
-  <li><b><i>configs.txt</i></b>: an example of configuration file, it must follow a specific syntax</li>
   <li><b><i>p_test.py</i></b>: the SUT, the user have to encode its program like this</li>
-  <li><b><i>json_reader.py</i></b>: a utility to parse the dataset, the user should modify it depending on their data</li>
+  <li><b><i>stat</i></b>: contains graphics of the results produced by the test runner</li>
+  <li><b><i>utilities</i></b>
+    <ul>
+      <li><b><i>configs.txt</i></b>: an example of configuration file, it must follow a specific syntax</li>
+      <li><b><i>json_reader.py</i></b>: a utility to parse the dataset, the user should modify it depending on their data</li>
+      <li><b><i>draw_graphics.py</i></b>: a script that plot the results of the algorithms executed in batch</li>
+      <li><b><i>test_runner.sh</i></b>: a simple script to perform some experiments with different parameters to understand the behavior of the algorithm</li>
+    </ul>
+  </li>
 </ul>
 
 **1. *p_test* format** <br>

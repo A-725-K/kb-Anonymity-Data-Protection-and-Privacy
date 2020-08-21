@@ -6,7 +6,7 @@ To run the project is sufficient to clone or download this repository, with the 
 ```
 git clone https://github.com/A-725-K/kb-Anonimity-Data-Protection-and-Privacy.git
 ```
-Our project rely on **Z3** sovler, if you don't have it installed, please refer to their [main page](https://github.com/Z3Prover/z3).
+Our project relies on **Z3** solver, if you don't have it installed, please refer to their [main page](https://github.com/Z3Prover/z3).
 
 ## How to launch the program
 You have only to run this simple command from your terminal:

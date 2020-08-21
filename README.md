@@ -67,5 +67,5 @@ The *comma* symbol separates the conditions to be put in **OR**, while the *whit
 
 ## Authors
 
-* **<i>Andrea Canepa</i>** - Computer Science, UNIGE - *Data Protection and Privacy a.y. 2018/2019*
-* **<i>Alessio Ravera</i>** - Computer Science, UNIGE - *Data Protection and Privacy a.y. 2018/2019*
+* **<i>Andrea Canepa</i>** - Computer Science, UNIGE - *Data Protection and Privacy a.y. 2019/2020*
+* **<i>Alessio Ravera</i>** - Computer Science, UNIGE - *Data Protection and Privacy a.y. 2019/2020*
